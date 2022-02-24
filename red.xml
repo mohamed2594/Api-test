@@ -3,6 +3,7 @@
     <configVersion>2</configVersion>
     <relativeTo>WORKSPACE</relativeTo>
     <referencedLibrary type="PYTHON" name="RequestsLibrary" path="C:/Users/Mohamed/AppData/Local/Programs/Python/Python37/Lib/site-packages/RequestsLibrary/__init__.py" dynamic="false"/>
+    <referencedLibrary type="PYTHON" name="SeleniumLibrary" path="C:/Users/Mohamed/AppData/Local/Programs/Python/Python37/Lib/site-packages/SeleniumLibrary/__init__.py" dynamic="false"/>
     <pythonpath/>
     <classpath/>
     <excludedForValidation/>

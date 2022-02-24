@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.1 (Python 3.7.0 on win32)" generated="20220224 15:10:59.977" rpa="false">
+<suite id="s1" name="Api-test" source="C:\Users\Mohamed\Desktop\Orange\Robot_workspace\Api-test">
+<suite id="s1-s1" name="Suite1" source="C:\Users\Mohamed\Desktop\Orange\Robot_workspace\Api-test\suite1.robot">
+<test id="s1-s1-t1" name="Get_request">
+<kw name="GET" library="RequestsLibrary">
+<doc>Sends a GET request.</doc>
+<arguments>
+<arg>https://6213974e89fad53b1ffa2093.mockapi.io/Students/18</arg>
+</arguments>
+<assign>
+<var>${Response}</var>
+</assign>
+<msg timestamp="20220224 15:11:01.269" level="INFO">GET Request : url=https://6213974e89fad53b1ffa2093.mockapi.io/Students/18 
+ path_url=/Students/18 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220224 15:11:01.270" level="INFO">GET Response : url=https://6213974e89fad53b1ffa2093.mockapi.io/Students/18 
+ status=200, reason=OK 
+ headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS', 'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type,Cache-Control,access_token', 'Content-Type': 'application/json', 'Content-Length': '105', 'Etag': '"443703757"', 'Vary': 'Accept-Encoding', 'Date': 'Thu, 24 Feb 2022 13:11:00 GMT', 'Via': '1.1 vegur'} 
+ body={"FirstName":"Mohamed","LastName":"Mahmoud","Country":"Egypt","SchoolName":"Hassan Ebn Thabet","id":"18"} 
+ </msg>
+<msg timestamp="20220224 15:11:01.271" level="INFO">${Response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220224 15:11:00.407" endtime="20220224 15:11:01.272"></status>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<doc>Fails if response status code is different than the expected.</doc>
+<arguments>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20220224 15:11:01.274" endtime="20220224 15:11:01.276"></status>
+</kw>
+<status status="PASS" starttime="20220224 15:11:00.406" endtime="20220224 15:11:01.278" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20220224 15:11:00.211" endtime="20220224 15:11:01.281"></status>
+</suite>
+<status status="PASS" starttime="20220224 15:11:00.165" endtime="20220224 15:11:01.286"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Api-test">Api-test</stat>
+<stat pass="1" fail="0" id="s1-s1" name="Suite1">Api-test.Suite1</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

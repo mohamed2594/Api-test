@@ -1,52 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.1 (Python 3.7.0 on win32)" generated="20220224 15:10:59.977" rpa="false">
-<suite id="s1" name="Api-test" source="C:\Users\Mohamed\Desktop\Orange\Robot_workspace\Api-test">
-<suite id="s1-s1" name="Suite1" source="C:\Users\Mohamed\Desktop\Orange\Robot_workspace\Api-test\suite1.robot">
-<test id="s1-s1-t1" name="Get_request">
-<kw name="GET" library="RequestsLibrary">
-<doc>Sends a GET request.</doc>
+<robot generator="Robot 3.1.1 (Python 3.7.0 on win32)" generated="20220228 16:54:12.251" rpa="false">
+<suite id="s1" name="Api-test" source="D:\Orange\Robot_workspace\Api-test">
+<suite id="s1-s1" name="Clients Suite" source="D:\Orange\Robot_workspace\Api-test\Clients_Suite.robot">
+<kw name="Create Session" library="RequestsLibrary" type="setup">
+<doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>https://6213974e89fad53b1ffa2093.mockapi.io/Students/18</arg>
+<arg>clients_session</arg>
+<arg>${base_url}</arg>
+<arg>verify=False</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20220228 16:54:12.591" level="INFO">Creating Session using : alias=clients_session, url=https://api-alias-preprod.itn.intraorange/validation/admin-private/v1, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220228 16:54:12.589" endtime="20220228 16:54:12.592"></status>
+</kw>
+<test id="s1-s1-t1" name="verify that user can create a client with valid body successfully">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>name=mohamed00</arg>
+<arg>numbersSearchAllowed=true</arg>
+<arg>creationDate=null</arg>
 </arguments>
 <assign>
-<var>${Response}</var>
+<var>${body}</var>
 </assign>
-<msg timestamp="20220224 15:11:01.269" level="INFO">GET Request : url=https://6213974e89fad53b1ffa2093.mockapi.io/Students/18 
- path_url=/Students/18 
- headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
+<msg timestamp="20220228 16:54:12.594" level="INFO">${body} = {'name': 'mohamed00', 'numbersSearchAllowed': 'true', 'creationDate': 'null'}</msg>
+<status status="PASS" starttime="20220228 16:54:12.593" endtime="20220228 16:54:12.595"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>clients_session</arg>
+<arg>/clients</arg>
+<arg>${body}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20220228 16:54:12.877" level="INFO">POST Request : url=https://api-alias-preprod.itn.intraorange/validation/admin-private/v1/clients 
+ path_url=/validation/admin-private/v1/clients 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '58'} 
+ body=name=mohamed00&amp;numbersSearchAllowed=true&amp;creationDate=null 
  </msg>
-<msg timestamp="20220224 15:11:01.270" level="INFO">GET Response : url=https://6213974e89fad53b1ffa2093.mockapi.io/Students/18 
- status=200, reason=OK 
- headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS', 'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type,Cache-Control,access_token', 'Content-Type': 'application/json', 'Content-Length': '105', 'Etag': '"443703757"', 'Vary': 'Accept-Encoding', 'Date': 'Thu, 24 Feb 2022 13:11:00 GMT', 'Via': '1.1 vegur'} 
- body={"FirstName":"Mohamed","LastName":"Mahmoud","Country":"Egypt","SchoolName":"Hassan Ebn Thabet","id":"18"} 
+<msg timestamp="20220228 16:54:12.877" level="INFO">POST Response : url=https://api-alias-preprod.itn.intraorange/validation/admin-private/v1/clients 
+ status=415, reason=Unsupported Media Type 
+ body={"code":68,"message":"UNSUPPORTED_MEDIA_TYPE","description":"Unsupported Media Type"} 
  </msg>
-<msg timestamp="20220224 15:11:01.271" level="INFO">${Response} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20220224 15:11:00.407" endtime="20220224 15:11:01.272"></status>
+<msg timestamp="20220228 16:54:12.878" level="INFO">${response} = &lt;Response [415]&gt;</msg>
+<status status="PASS" starttime="20220228 16:54:12.595" endtime="20220228 16:54:12.879"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<assign>
+<var>${content}</var>
+</assign>
+<msg timestamp="20220228 16:54:12.882" level="INFO">${content} = {"code":68,"message":"UNSUPPORTED_MEDIA_TYPE","description":"Unsupported Media Type"}</msg>
+<status status="PASS" starttime="20220228 16:54:12.880" endtime="20220228 16:54:12.882"></status>
 </kw>
 <kw name="Status Should Be" library="RequestsLibrary">
 <doc>Fails if response status code is different than the expected.</doc>
 <arguments>
-<arg>200</arg>
+<arg>201</arg>
+<arg>${response}</arg>
 </arguments>
-<status status="PASS" starttime="20220224 15:11:01.274" endtime="20220224 15:11:01.276"></status>
+<msg timestamp="20220228 16:54:12.889" level="FAIL">Url: https://api-alias-preprod.itn.intraorange/validation/admin-private/v1/clients Expected status: 415 != 201</msg>
+<status status="FAIL" starttime="20220228 16:54:12.883" endtime="20220228 16:54:12.890"></status>
 </kw>
-<status status="PASS" starttime="20220224 15:11:00.406" endtime="20220224 15:11:01.278" critical="yes"></status>
+<status status="FAIL" starttime="20220228 16:54:12.592" endtime="20220228 16:54:12.891" critical="yes">Url: https://api-alias-preprod.itn.intraorange/validation/admin-private/v1/clients Expected status: 415 != 201</status>
 </test>
-<status status="PASS" starttime="20220224 15:11:00.211" endtime="20220224 15:11:01.281"></status>
+<kw name="Delete All Sessions" library="RequestsLibrary" type="teardown">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220228 16:54:12.894" level="INFO">Delete All Sessions</msg>
+<status status="PASS" starttime="20220228 16:54:12.893" endtime="20220228 16:54:12.896"></status>
+</kw>
+<status status="FAIL" starttime="20220228 16:54:12.413" endtime="20220228 16:54:12.896"></status>
 </suite>
-<status status="PASS" starttime="20220224 15:11:00.165" endtime="20220224 15:11:01.286"></status>
+<status status="FAIL" starttime="20220228 16:54:12.361" endtime="20220228 16:54:12.900"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0">Critical Tests</stat>
-<stat pass="1" fail="0">All Tests</stat>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" id="s1" name="Api-test">Api-test</stat>
-<stat pass="1" fail="0" id="s1-s1" name="Suite1">Api-test.Suite1</stat>
+<stat pass="0" fail="1" id="s1" name="Api-test">Api-test</stat>
+<stat pass="0" fail="1" id="s1-s1" name="Clients Suite">Api-test.Clients Suite</stat>
 </suite>
 </statistics>
 <errors>

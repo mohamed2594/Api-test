@@ -1,66 +1,70 @@
 *** Settings ***
+Resource    ../Resources/common.robot
 
-Library    Collections
-Library    RequestsLibrary
-Library    JSONLibrary
-Library    FakerLibrary
 Suite Setup    Create Session  clients_session  ${base_url}    verify=False    disable_warnings=1     
 Suite Teardown    Delete All Sessions
-*** Variables ***
-${base_url}=    https://api-alias-preprod.itn.intraorange/validation/admin-private/v1
-${endpoint}=    /clients
-
-*** Keywords ***
-Get all
-    ${response}=    Get Request    clients_session        ${endpoint}    
 
 
+ 
 *** Test Cases ***
-verify that user can get all clients
-    ${response}=    Get Request    clients_session        ${endpoint}        
-    Status Should Be    200    ${response}
+verify that user can get clients
+    ${response}=    Get clients    clients_session    /clients
+    Assert Status_Code    200    ${response}
+    Assert Schema    clients.schema.json    ${response.json()}    
         
+    
 verify that user can get a specific client with his id
-    ${name}=    First Name
-    ${body}=    Create Dictionary    name=${name}    numbersSearchAllowed=true    creationDate=null
-    ${headers}=    Create Dictionary    Content-Type=application/json    
-    ${response}=    Post Request    clients_session    /clients    data=${body}    headers=${headers}    
-    ${res.id}=    Get Value From Json    ${response.json()}    $.id
-    ${response}=    Get Request    clients_session        ${endpoint}/${res.id}[0] 
-    Status Should Be    200    ${response}
-    ${client-name}=    Get Value From Json    ${response.json()}    $.name
-    Should Be Equal    ${client-name}[0]    ${name}    
+    ${Post_response}=    Create a client    clients_session    /clients
+    Assert Status_Code    201    ${Post_Response}  
+    ${res.id}=    Get Value From Json    ${Post_response.json()}    $.id
+    ${Get_Response}=    Get one client    clients_session    /clients    ${res.id}[0]
+    Assert Status_Code    200    ${Get_Response}
+    # ${client-name}=    Get Value From Json    ${Get_response.json()}    $.name
+    # Should Be Equal    ${client-name}[0]    ${name}    
  
    
-verify that user can get a specific 100 client by default
-    ${response}=    Get Request    clients_session        ${endpoint}    
-    Status Should Be    200    ${response}   
-    ${values}=    Get Value From Json    ${response.json()}    $..id
-    ${length}=    Get Length    ${values}
-    Should Be Equal As Integers    ${length}    100    
-       
+verify that user can get a 100 client by default
+    ${response}=    Get clients    clients_session    /clients
+    Assert Status_Code    200    ${response}
+    Assert Schema    clients.schema.json    ${response.json()}
+    Assert Results Number    100    ${response.json()}    ${response.headers}  
+
 verify that user can get less than 100 clients
-    ${params}    Create Dictionary    limit=20
-    ${response}=    Get Request    clients_session    ${endpoint}    params=${params}
-    Status Should Be    200    ${response}    
-    ${values}=    Get Value From Json    ${response.json()}    $..id
-    ${length}=    Get Length    ${values}
-    Should Be Equal As Integers    ${length}    20
+    ${response}=    Get number of clients    clients_session    /clients    20
+    Assert Status_Code    200    ${response}
+    Assert Schema    clients.schema.json    ${response.json()}
+    Assert Results Number    20    ${response.json()}    ${response.headers}
 
 verify that user cannot get more than 100 client
-    ${params}    Create Dictionary    limit=120
-    ${response}=    Get Request    clients_session    ${endpoint}    params=${params}
-    ${content}=    Convert To String    ${response.content}
-    Status Should Be    400    ${response}
-    ${code}=    Get Value From Json    ${response.json()}    $.code
-    ${message}=    Get Value From Json    ${response.json()}    $.message
-    Should Be Equal    ${code}[0]    28
-    Should Be Equal    ${message}[0]    INVALID_QUERY_PARAM_VALUE    
+    # ${params}    Create Dictionary    limit=120
+    # ${response}=    Get Request    clients_session    ${endpoint}    params=${params}
+    # Status Should Be    400    ${response}
+    # ${code}=    Get Value From Json    ${response.json()}    $.code
+    # ${message}=    Get Value From Json    ${response.json()}    $.message
+    # Should Be Equal As Integers    ${code}[0]    28
+    # Should Be Equal    ${message}[0]    INVALID_QUERY_PARAM_VALUE    
+    ${response}=    Get number of clients    clients_session    /clients    20
+    Assert Status_Code    200    ${response}
+    Assert Schema    clients.schema.json    ${response.json()}
+    Assert Results Number    20    ${response.json()}    ${response.headers}
   
 verify that user can make offset for the geted clients
-    ${params}    Create Dictionary    offset=5000
+    ${response}=    Get Request    clients_session    ${endpoint}
+    Status Should Be    200    ${response} 
+    ${total_clients}=    Get From Dictionary    ${response.headers}    x-total-count
+     # Log To Console    ${total clients}    
+    ${offset}=    Evaluate    ${total_clients}-20
+    # Log To Console    ${offset}    
+    ${params}    Create Dictionary    offset=${offset}
     ${response}=    Get Request    clients_session    ${endpoint}    params=${params}
     Status Should Be    200    ${response}        
+    ${result_length}=    Get From Dictionary    ${response.headers}    x-result-count
+    Should Be Equal As Integers    ${result_length}    20  
+    ${values}=    Get Value From Json    ${response.json()}    $..id
+    ${length}=    Get Length    ${values}
+    Should Be Equal As Integers    ${length}    20  
+     
+       
 
 verify that user cannot get clients with invalid limit param format
     ${params}    Create Dictionary    limit=m
@@ -68,7 +72,7 @@ verify that user cannot get clients with invalid limit param format
     Status Should Be    400    ${response}
     ${code}=    Get Value From Json    ${response.json()}    $.code
     ${message}=    Get Value From Json    ${response.json()}    $.message
-    Should Be Equal    ${code}[0]    28
+    Should Be Equal As Integers    ${code}[0]    28
     Should Be Equal    ${message}[0]    INVALID_QUERY_PARAM_VALUE    
                    
 verify that user cannot get clients with invalid offset param format
@@ -76,7 +80,7 @@ verify that user cannot get clients with invalid offset param format
     ${response}=    Get Request    clients_session    ${endpoint}    params=${params}
     ${code}=    Get Value From Json    ${response.json()}    $.code
     ${message}=    Get Value From Json    ${response.json()}    $.message
-    Should Be Equal    ${code}[0]    28
+    Should Be Equal As Integers    ${code}[0]    28
     Should Be Equal    ${message}[0]    INVALID_QUERY_PARAM_VALUE 
            
 verify that user cannot get clients with wrong endpoint
@@ -84,7 +88,7 @@ verify that user cannot get clients with wrong endpoint
     Status Should Be    404    ${response}
     ${code}=    Get Value From Json    ${response.json()}    $.code
     ${message}=    Get Value From Json    ${response.json()}    $.message
-    Should Be Equal    ${code}[0]    60
+    Should Be Equal As Integers    ${code}[0]    60
     Should Be Equal    ${message}[0]    NOT_FOUND 
   
 verify that user cannot get a specific client with wrong id
@@ -93,7 +97,7 @@ verify that user cannot get a specific client with wrong id
     Status Should Be    404    ${response}
     ${code}=    Get Value From Json    ${response.json()}    $.code
     ${message}=    Get Value From Json    ${response.json()}    $.message
-    Should Be Equal    ${code}[0]    60
+    Should Be Equal As Integers    ${code}[0]    60
     Should Be Equal    ${message}[0]    NOT_FOUND 
 
 verify that user cannot get a specific client with the name
@@ -101,5 +105,5 @@ verify that user cannot get a specific client with the name
     Status Should Be    404    ${response}
     ${code}=    Get Value From Json    ${response.json()}    $.code
     ${message}=    Get Value From Json    ${response.json()}    $.message
-    Should Be Equal    ${code}[0]    60
+    Should Be Equal As Integers    ${code}[0]    60
     Should Be Equal    ${message}[0]    NOT_FOUND 

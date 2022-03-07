@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.1 (Python 3.7.0 on win32)" generated="20220307 15:36:21.209" rpa="false">
+<suite id="s1" name="Api-test" source="D:\Orange\Robot_workspace\Api-test">
+<suite id="s1-s1" name="Tests" source="D:\Orange\Robot_workspace\Api-test\Tests">
+<suite id="s1-s1-s1" name="Get Requests Test" source="D:\Orange\Robot_workspace\Api-test\Tests\Get_Requests_Test.robot">
+<kw name="Create Session" library="RequestsLibrary" type="setup">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>clients_session</arg>
+<arg>${base_url}</arg>
+<arg>verify=False</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20220307 15:36:26.662" level="INFO">Creating Session using : alias=clients_session, url=https://api-alias-preprod.itn.intraorange/validation/admin-private/v1, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220307 15:36:26.638" endtime="20220307 15:36:26.663"></status>
+</kw>
+<test id="s1-s1-s1-t1" name="verify that user can get clients">
+<kw name="Get clients" library="common">
+<arguments>
+<arg>clients_session</arg>
+<arg>/clients</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>${session_name}</arg>
+<arg>${endpoint}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20220307 15:36:27.299" level="INFO">GET Request : url=https://api-alias-preprod.itn.intraorange/validation/admin-private/v1/clients 
+ path_url=/validation/admin-private/v1/clients 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220307 15:36:27.300" level="INFO">GET Response : url=https://api-alias-preprod.itn.intraorange/validation/admin-private/v1/clients 
+ status=200, reason=OK 
+ body=[{"id":"074347b5-67a4-4190-a560-c66c0cdb0fac","name":"ali","numbersSearchAllowed":true,"creationDate":null},{"id":"f70d84dd-0581-41dd-9cf8-f82c42f83296","name":"Postman test- updated","numbersSearchAllowed":true,"creationDate":null},{"id":"uuid 13","name":"name 13","numbersSearchAllowed":true,"creationDate":null},{"id":"e36b1bcc-90eb-46c5-acdc-2cbad2ca886b","name":"Monsters, Inc.","numbersSearchAllowed":true,"creationDate":null},{"id":"c0976f42-e1e3-4bca-8204-8967587cf2cd","name":"sample test","numbersSearchAllowed":true,"creationDate":null},{"id":"bf386eca-5855-4a8e-996b-a8bf9a8e848f","name":"Sulley","numbersSearchAllowed":true,"creationDate":null},{"id":"f6ccbd69-64a5-43bb-84ae-48333c626dc0","name":"ss","numbersSearchAllowed":true,"creationDate":null},{"id":"77322eb1-ea35-442a-b371-4b403a3bcf42","name":"Randall Boggs","numbersSearchAllowed":true,"creationDate":null},{"id":"c94f6356-e232-44cc-b878-ae7934e7bec8","name":"Roz","numbersSearchAllowed":true,"creationDate":null},{"id":"5459bf39-9081-4d5f-8179-e33751aa302e","name":"Abominable Snowman","numbersSearchAllowed":true,"creationDate":null},{"id":"20133ceb-0292-4993-a627-16b74b8d2c64","name":"client 1","numbersSearchAllowed":true,"creationDate":null},{"id":"53c16afb-91a5-409d-b25c-6df6c76c5848","name":"client 2","numbersSearchAllowed":true,"creationDate":null},{"id":"d636c783-5c4c-4f0d-8105-a76c52c82fd5","name":"client 3","numbersSearchAllowed":true,"creationDate":null},{"id":"56b86f8a-876f-422e-9b9d-72accdf3cf78","name":"client 5","numbersSearchAllowed":true,"creationDate":null},{"id":"b44235cd-533d-4fed-9927-979b0b0a2fb4","name":"client 6","numbersSearchAllowed":true,"creationDate":null},{"id":"9b534759-3301-41a4-b70e-e6f84c329ac4","name":"client 7","numbersSearchAllowed":true,"creationDate":null},{"id":"9e645f22-caeb-41bb-9d71-d8e583197f69","name":"client 8","numbersSearchAllowed":true,"creationDate":null},{"id":"8fab5057-7a9e-4cbf-abe3-4da8f367eca9","name":"client 9","numbersSearchAllowed":true,"creationDate":null},{"id":"76f7ed74-6d43-420f-849c-e4ebc6b5e895","name":"client 10","numbersSearchAllowed":true,"creationDate":null},{"id":"0ec10715-57e5-4822-b477-dbe2020e76be","name":"client 11","numbersSearchAllowed":true,"creationDate":null},{"id":"21fc5f60-193d-4f09-8e65-138bb7b178d5","name":"client 12","numbersSearchAllowed":true,"creationDate":null},{"id":"71427d6a-5bd8-4006-8a8b-f9acdd4c0189","name":"client 13","numbersSearchAllowed":true,"creationDate":null},{"id":"4ff1abce-e2fe-4333-bd99-1e4b59f00c42","name":"client 14","numbersSearchAllowed":true,"creationDate":null},{"id":"f23674da-112f-470a-b2ef-b5e5f131daae","name":"client 15","numbersSearchAllowed":true,"creationDate":null},{"id":"7fc90a1f-4d21-4927-927e-2ed5f075fc3e","name":"client 16","numbersSearchAllowed":true,"creationDate":null},{"id":"3254676f-55f9-4f43-a2a9-bfc130c858b0","name":"client 17","numbersSearchAllowed":true,"creationDate":null},{"id":"42522efe-ef1f-413e-9cb8-ff18b992c316","name":"client 18","numbersSearchAllowed":true,"creationDate":null},{"id":"83d0b5cc-d761-4b07-81f2-384a388651af","name":"client 20","numbersSearchAllowed":true,"creationDate":null},{"id":"026fe865-e48c-4f3b-882c-005d29578a18","name":"client 21","numbersSearchAllowed":true,"creationDate":null},{"id":"daa79fe3-462b-47e9-a692-b3cb2f7fefd3","name":"client 22","numbersSearchAllowed":true,"creationDate":null},{"id":"b20e79c7-41d9-451e-9ac7-352fb0dd740d","name":"client 23","numbersSearchAllowed":true,"creationDate":null},{"id":"07d7ca33-0a4f-4773-8dab-33ac99d859d8","name":"client 24","numbersSearchAllowed":true,"creationDate":null},{"id":"611e8093-e268-43e4-98e9-daa1aee5f56d","name":"client 25","numbersSearchAllowed":true,"creationDate":null},{"id":"3f5d06c6-4a2a-4c3d-8e99-b57e09320c9b","name":"client 26","numbersSearchAllowed":true,"creationDate":null},{"id":"2f043aab-a4c5-4b20-b9e6-14d1d59c51c8","name":"client 27","numbersSearchAllowed":true,"creationDate":null},{"id":"b06c3713-3d20-4562-a42b-8fe40070fad1","name":"client 28","numbersSearchAllowed":true,"creationDate":null},{"id":"cf087125-379c-4a9c-b889-b3204ef1e95b","name":"client 29","numbersSearchAllowed":true,"creationDate":null},{"id":"6229d8b1-a11f-4f98-b8b3-7d12114c7a3d","name":"client 30","numbersSearchAllowed":true,"creationDate":null},{"id":"8f79a425-2cb2-49b1-95c6-d3e3ef1f19e3","name":"client 31","numbersSearchAllowed":true,"creationDate":null},{"id":"169956c4-495c-4a08-afe2-19e2b9ff34f2","name":"client 32","numbersSearchAllowed":true,"creationDate":null},{"id":"63589a89-6863-4c87-93ec-ec60084ce27d","name":"client 33","numbersSearchAllowed":true,"creationDate":null},{"id":"e37c3af8-615c-4999-ad6a-18648b3d883c","name":"client 34","numbersSearchAllowed":true,"creationDate":null},{"id":"ac0e4ac7-ad14-45e2-8bcd-232d98b48afa","name":"client 35","numbersSearchAllowed":true,"creationDate":null},{"id":"bacf1d00-7b79-4f84-82fd-2643fd41d25d","name":"client 36","numbersSearchAllowed":true,"creationDate":null},{"id":"bf5b3e93-cb3c-47ca-a999-3e8c783db61c","name":"client 37","numbersSearchAllowed":true,"creationDate":null},{"id":"f63cd3ba-2722-4e17-923e-b7f94e69d7b0","name":"client 38","numbersSearchAllowed":true,"creationDate":null},{"id":"8547b2da-ac72-4d5d-ac9c-9e7a88a24141","name":"client 39","numbersSearchAllowed":true,"creationDate":null},{"id":"4f0c3f3f-a23b-43ac-b6b2-8904fb0583cf","name":"client 40","numbersSearchAllowed":true,"creationDate":null},{"id":"a0691ab4-d273-466a-a2f4-32632acccbce","name":"client 41","numbersSearchAllowed":true,"creationDate":null},{"id":"b3d4e436-a543-4e93-ad58-69ac527cc6d1","name":"client 42","numbersSearchAllowed":true,"creationDate":null},{"id":"833ffe02-c8e3-4583-98ab-291f16e060b8","name":"client 43","numbersSearchAllowed":true,"creationDate":null},{"id":"04c9c657-110c-44d5-b653-3f65e675dcf2","name":"client 44","numbersSearchAllowed":true,"creationDate":null},{"id":"8b21f22f-c103-44e2-a02c-6e93673c6829","name":"client 45","numbersSearchAllowed":true,"creationDate":null},{"id":"2df3cead-5a57-4ca3-b079-d1c32105b911","name":"client 46","numbersSearchAllowed":true,"creationDate":null},{"id":"a48a6ab9-6880-4276-be17-fd16fcf95a07","name":"client 47","numbersSearchAllowed":true,"creationDate":null},{"id":"427d6e4a-9d68-44ac-8f5e-6b5dfce2ce5d","name":"client 48","numbersSearchAllowed":true,"creationDate":null},{"id":"1d5561dd-4a43-4a1f-86ee-f30f4c88c72f","name":"client 49","numbersSearchAllowed":true,"creationDate":null},{"id":"26fbee17-2976-4bba-9018-1ad4a3dae338","name":"client 50","numbersSearchAllowed":true,"creationDate":null},{"id":"c2ae57c2-03b1-4b16-9296-a81ab0bfad7d","name":"client 51","numbersSearchAllowed":true,"creationDate":null},{"id":"f60b5cf4-e5b6-4d76-a1c0-ade338ea7f24","name":"client 52","numbersSearchAllowed":true,"creationDate":null},{"id":"32431376-f018-4081-9b5c-06d5963d50cd","name":"client 53","numbersSearchAllowed":true,"creationDate":null},{"id":"0ed685b2-df54-409c-b4e1-a5b1b71f895a","name":"client 54","numbersSearchAllowed":true,"creationDate":null},{"id":"7baee9d3-4e67-4cd1-91f0-fb4f3a48b647","name":"client 55","numbersSearchAllowed":true,"creationDate":null},{"id":"6f28eeba-9d05-434f-bf43-ead1589b3983","name":"client 57","numbersSearchAllowed":true,"creationDate":null},{"id":"07fe1914-28a9-47bd-a23a-7619200aab59","name":"client 58","numbersSearchAllowed":true,"creationDate":null},{"id":"d7cd4ad3-9156-4689-9e82-214ef49143e5","name":"client 59","numbersSearchAllowed":true,"creationDate":null},{"id":"39c7e9a8-0666-4a39-aa3f-aeeb3675a0bf","name":"client 60","numbersSearchAllowed":true,"creationDate":null},{"id":"c208e4c4-f6de-44f5-a596-3ff6bf2b23c0","name":"client 61","numbersSearchAllowed":true,"creationDate":null},{"id":"9256a12a-df03-47bf-95b8-dad5fdcced7c","name":"client 62","numbersSearchAllowed":true,"creationDate":null},{"id":"222ff13d-4b7a-4257-b4fa-ced51083b8df","name":"client 63","numbersSearchAllowed":true,"creationDate":null},{"id":"bc4d0ef5-1f60-41c3-bd44-03bd5e10b004","name":"client 64","numbersSearchAllowed":true,"creationDate":null},{"id":"a7458ca8-1556-4567-9509-37f797e4fe06","name":"client 65","numbersSearchAllowed":true,"creationDate":null},{"id":"814d0383-3293-4a50-8925-94c980b33d1a","name":"client 66","numbersSearchAllowed":true,"creationDate":null},{"id":"8037bb77-cf17-4469-a8df-044e40d369f8","name":"client 67","numbersSearchAllowed":true,"creationDate":null},{"id":"cbba0ea2-5c82-4adf-ab85-fa65675a7de6","name":"client 68","numbersSearchAllowed":true,"creationDate":null},{"id":"2a782ee7-31fd-42d2-bb06-3ee18cde00d5","name":"client 69","numbersSearchAllowed":true,"creationDate":null},{"id":"bf5dd603-bd3c-494b-a210-c5d038f8f996","name":"client 70","numbersSearchAllowed":true,"creationDate":null},{"id":"f3bb3d3a-2e06-449b-b36c-3d96fc82f355","name":"client 71","numbersSearchAllowed":true,"creationDate":null},{"id":"4a1d033b-6280-4049-b356-d55712a2b5b3","name":"client 72","numbersSearchAllowed":true,"creationDate":null},{"id":"b048a434-8385-4951-bf36-7f037b50b18e","name":"client 73","numbersSearchAllowed":true,"creationDate":null},{"id":"501a9c24-841c-4f90-ae9f-e5fd9b349b38","name":"client 74","numbersSearchAllowed":true,"creationDate":null},{"id":"c4f1027f-bbc0-4862-87f0-f4450f224ad3","name":"client 75","numbersSearchAllowed":true,"creationDate":null},{"id":"bcc54127-eab9-4306-852f-c957c4a9101c","name":"client 76","numbersSearchAllowed":true,"creationDate":null},{"id":"6b8763e3-1ba7-4475-a326-bcd3cd7701dd","name":"client 77","numbersSearchAllowed":true,"creationDate":null},{"id":"a573bbf3-ecf7-4159-ae44-742ca65e7824","name":"client 78","numbersSearchAllowed":true,"creationDate":null},{"id":"e7ba121a-7a7d-4470-8caa-4903fd8ec1ac","name":"client 79","numbersSearchAllowed":true,"creationDate":null},{"id":"8de251e2-7e14-4027-a01c-164926c6e01c","name":"client 80","numbersSearchAllowed":true,"creationDate":null},{"id":"713fd14f-9329-4189-a16d-d9328a04b8ac","name":"client 81","numbersSearchAllowed":true,"creationDate":null},{"id":"fe140233-25cd-42a9-8f2e-10d03dbdde27","name":"client 82","numbersSearchAllowe... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220307 15:36:27.303" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220307 15:36:26.667" endtime="20220307 15:36:27.303"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${assddf}</arg>
+</arguments>
+<msg timestamp="20220307 15:36:27.309" level="INFO">FakerLibrary.First Name</msg>
+<status status="PASS" starttime="20220307 15:36:27.307" endtime="20220307 15:36:27.309"></status>
+</kw>
+<msg timestamp="20220307 15:36:27.311" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220307 15:36:26.666" endtime="20220307 15:36:27.311"></status>
+</kw>
+<kw name="Assert Status_Code" library="common">
+<arguments>
+<arg>200</arg>
+<arg>${response}</arg>
+</arguments>
+<kw name="Status Should Be" library="RequestsLibrary">
+<doc>Fails if response status code is different than the expected.</doc>
+<arguments>
+<arg>${expected}</arg>
+<arg>${actual}</arg>
+</arguments>
+<status status="PASS" starttime="20220307 15:36:27.315" endtime="20220307 15:36:27.317"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${actual}</arg>
+</arguments>
+<msg timestamp="20220307 15:36:27.319" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220307 15:36:27.318" endtime="20220307 15:36:27.320"></status>
+</kw>
+<status status="PASS" starttime="20220307 15:36:27.312" endtime="20220307 15:36:27.321"></status>
+</kw>
+<kw name="Assert Schema" library="common">
+<arguments>
+<arg>clients.schema.json</arg>
+<arg>${response.json()}</arg>
+</arguments>
+<kw name="Validate Json" library="JSONSchemaLibrary">
+<arguments>
+<arg>${expected_Schema}</arg>
+<arg>${actual_Schema}</arg>
+</arguments>
+<status status="PASS" starttime="20220307 15:36:27.326" endtime="20220307 15:36:27.390"></status>
+</kw>
+<status status="PASS" starttime="20220307 15:36:27.323" endtime="20220307 15:36:27.391"></status>
+</kw>
+<status status="PASS" starttime="20220307 15:36:26.664" endtime="20220307 15:36:27.393" critical="yes"></status>
+</test>
+<kw name="Delete All Sessions" library="RequestsLibrary" type="teardown">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220307 15:36:27.397" level="INFO">Delete All Sessions</msg>
+<status status="PASS" starttime="20220307 15:36:27.395" endtime="20220307 15:36:27.398"></status>
+</kw>
+<status status="PASS" starttime="20220307 15:36:22.677" endtime="20220307 15:36:27.400"></status>
+</suite>
+<status status="PASS" starttime="20220307 15:36:22.672" endtime="20220307 15:36:27.408"></status>
+</suite>
+<status status="PASS" starttime="20220307 15:36:22.625" endtime="20220307 15:36:27.414"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Api-test">Api-test</stat>
+<stat pass="1" fail="0" id="s1-s1" name="Tests">Api-test.Tests</stat>
+<stat pass="1" fail="0" id="s1-s1-s1" name="Get Requests Test">Api-test.Tests.Get Requests Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

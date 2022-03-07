@@ -1,0 +1,23 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": 
+    [ 
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "numbersSearchAllowed": {
+        "type": "boolean"
+      },
+      "creationDate": {
+        "type": ["string","null"]
+      }
+    }
+  }
+}

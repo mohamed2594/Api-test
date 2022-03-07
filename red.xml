@@ -5,6 +5,7 @@
     <referencedLibrary type="PYTHON" name="RequestsLibrary" path="C:/Users/Mohamed/AppData/Local/Programs/Python/Python37/Lib/site-packages/RequestsLibrary/__init__.py" dynamic="false"/>
     <referencedLibrary type="PYTHON" name="JSONLibrary" path="C:/Users/Mohamed/AppData/Local/Programs/Python/Python37/Lib/site-packages/JSONLibrary/__init__.py" dynamic="false"/>
     <referencedLibrary type="PYTHON" name="FakerLibrary" path="C:/Users/Mohamed/AppData/Local/Programs/Python/Python37/Lib/site-packages/FakerLibrary/__init__.py" dynamic="false"/>
+    <referencedLibrary type="PYTHON" name="JSONSchemaLibrary" path="C:/Users/Mohamed/AppData/Local/Programs/Python/Python37/Lib/site-packages/JSONSchemaLibrary/__init__.py" dynamic="false"/>
     <pythonpath/>
     <classpath/>
     <excludedForValidation/>
